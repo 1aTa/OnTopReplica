@@ -427,23 +427,23 @@ namespace OnTopReplica {
         {
             protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
             {
-                //Draw smaller arrow (6x6 pixels)
+                //Draw sideways chevron arrows to match Windows 11
                 e.ArrowRectangle = new Rectangle(
-                    e.ArrowRectangle.X + e.ArrowRectangle.Width - 8,
-                    e.ArrowRectangle.Y + (e.ArrowRectangle.Height - 6) / 2,
-                    6,
-                    6
+                    e.ArrowRectangle.X + e.ArrowRectangle.Width - 10,
+                    e.ArrowRectangle.Y + (e.ArrowRectangle.Height - 10) / 2,
+                    10,
+                    10
                 );
-                using (SolidBrush brush = new SolidBrush(SystemColors.ControlText))
+                using (Pen pen = new Pen(SystemColors.ControlText, 1.5f))
                 {
                     Point[] points = new Point[]
                     {
-                        new Point(e.ArrowRectangle.X, e.ArrowRectangle.Y),
-                        new Point(e.ArrowRectangle.X + 6, e.ArrowRectangle.Y + 3),
-                        new Point(e.ArrowRectangle.X, e.ArrowRectangle.Y + 6)
+                        new Point(e.ArrowRectangle.X + 2, e.ArrowRectangle.Y + 2),
+                        new Point(e.ArrowRectangle.X + 7, e.ArrowRectangle.Y + 5),
+                        new Point(e.ArrowRectangle.X + 2, e.ArrowRectangle.Y + 8)
                     };
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.FillPolygon(brush, points);
+                    e.Graphics.DrawLines(pen, points);
                 }
             }
         }
