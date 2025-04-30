@@ -10,6 +10,7 @@ using OnTopReplica.Update;
 using OnTopReplica.WindowSeekers;
 using WindowsFormsAero.Dwm;
 using WindowsFormsAero.TaskDialog;
+using System.Drawing.Drawing2D;
 
 namespace OnTopReplica {
 
@@ -426,7 +427,7 @@ namespace OnTopReplica {
         {
             protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
             {
-                //Draw smaller arrow (6 MOUSE_CLICKED_TO_ENLARGE = true;
+                //Draw smaller arrow (6x6 pixels)
                 e.ArrowRectangle = new Rectangle(
                     e.ArrowRectangle.X + e.ArrowRectangle.Width - 8,
                     e.ArrowRectangle.Y + (e.ArrowRectangle.Height - 6) / 2,
