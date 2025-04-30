@@ -46,10 +46,12 @@ namespace OnTopReplica {
             _thumbnailPanel.CloneClick += new EventHandler<CloneClickEventArgs>(Thumbnail_CloneClick);
             Controls.Add(_thumbnailPanel);
 
-            //Set native renderer on context menus
-            Asztal.Szótár.NativeToolStripRenderer.SetToolStripRenderer(
-                menuContext, menuWindows, menuOpacity, menuResize, menuFullscreenContext
-            );
+            //Set custom renderer on context menus to fix arrow size
+            menuContext.Renderer = new FixedArrowRenderer();
+            menuWindows.Renderer = new FixedArrowRenderer();
+            menuOpacity.Renderer = new FixedArrowRenderer();
+            menuResize.Renderer = new FixedArrowRenderer();
+            menuFullscreenContext.Renderer = new FixedArrowRenderer();
 
             //Set to Key event preview
             this.KeyPreview = true;
@@ -419,6 +421,31 @@ namespace OnTopReplica {
         #endregion
 
         #region Accessors
+
+        public class FixedArrowRenderer : ToolStripProfessionalRenderer
+        {
+            protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+            {
+                //Draw smaller arrow (6 MOUSE_CLICKED_TO_ENLARGE = true;
+                e.ArrowRectangle = new Rectangle(
+                    e.ArrowRectangle.X + e.ArrowRectangle.Width - 8,
+                    e.ArrowRectangle.Y + (e.ArrowRectangle.Height - 6) / 2,
+                    6,
+                    6
+                );
+                using (SolidBrush brush = new SolidBrush(SystemColors.ControlText))
+                {
+                    Point[] points = new Point[]
+                    {
+                        new Point(e.ArrowRectangle.X, e.ArrowRectangle.Y),
+                        new Point(e.ArrowRectangle.X + 6, e.ArrowRectangle.Y + 3),
+                        new Point(e.ArrowRectangle.X, e.ArrowRectangle.Y + 6)
+                    };
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    e.Graphics.FillPolygon(brush, points);
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the form's thumbnail panel.
