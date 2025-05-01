@@ -429,18 +429,18 @@ namespace OnTopReplica {
             {
                 //Draw sideways chevron arrows to match Windows 11
                 e.ArrowRectangle = new Rectangle(
-                    e.ArrowRectangle.X + e.ArrowRectangle.Width - 10,
-                    e.ArrowRectangle.Y + (e.ArrowRectangle.Height - 10) / 2,
-                    10,
-                    10
+                    e.ArrowRectangle.X + e.ArrowRectangle.Width - 8,
+                    e.ArrowRectangle.Y + (e.ArrowRectangle.Height - 14) / 2,
+                    8,
+                    14
                 );
-                using (Pen pen = new Pen(SystemColors.ControlText, 1.5f))
+                using (Pen pen = new Pen(SystemColors.ControlText, 1.51f))
                 {
                     Point[] points = new Point[]
                     {
-                        new Point(e.ArrowRectangle.X + 2, e.ArrowRectangle.Y + 2),
-                        new Point(e.ArrowRectangle.X + 7, e.ArrowRectangle.Y + 5),
-                        new Point(e.ArrowRectangle.X + 2, e.ArrowRectangle.Y + 8)
+                        new Point(e.ArrowRectangle.X + 2, e.ArrowRectangle.Y + 3),
+                        new Point(e.ArrowRectangle.X + 6, e.ArrowRectangle.Y + 7),
+                        new Point(e.ArrowRectangle.X + 2, e.ArrowRectangle.Y + 11)
                     };
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.DrawLines(pen, points);
